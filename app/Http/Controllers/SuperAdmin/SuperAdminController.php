@@ -12,10 +12,4 @@ class SuperAdminController extends Controller
     public function index(){
         return view("superadmin.home");
     }
-    //criar a conta de cada portfolio
-    public function accountView(){
-        $companies = company::all();
-        return view("superadmin.account", ["companies" => $companies]);
-    }
-
 }

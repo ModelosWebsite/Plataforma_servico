@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth")->controller(SuperAdminController::class)->prefix("/super/admin")->group(function(){
     Route::get("/inicial", "index")->name("super.admin.index");
-    Route::get("/contas", "accountView")->name("super.admin.account.view");
 });
 
 Route::middleware("auth")->controller(RegisterCompanyController::class)->prefix("/super/admin")->group(function(){
+    Route::get("/contas", "accountView")->name("super.admin.account.view");
     Route::post("/registrar/empresa", "companyRegister")->name("super.admin.register.company");
 });
 

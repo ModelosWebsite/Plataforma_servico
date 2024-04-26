@@ -155,7 +155,7 @@ class AdminController extends Controller
         if($request->hasFile("image")){
             $file = $request->file("image");
             $extension = $file->getClientOriginalExtension();
-            $filename = "about" . "." . $extension;
+            $filename = date('YmdHis'). "." . $extension;
             $file->move("image/", $filename);
             $data->image = $filename;
         }

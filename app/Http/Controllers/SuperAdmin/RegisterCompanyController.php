@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterCompanyController extends Controller
 {
+
+    //criar a conta de cada portfolio
+    public function accountView(){
+        $companies = company::all();
+        return view("superadmin.company.account", ["companies" => $companies]);
+    }
+    
     public function companyRegister(Request $request) {
         // Validation
         $validatedData = $request->validate([
