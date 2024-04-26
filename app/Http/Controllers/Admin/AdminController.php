@@ -51,7 +51,7 @@ class AdminController extends Controller
         if($request->hasFile("image")){
             $file = $request->file("image");
             $extension = $file->getClientOriginalExtension();
-            $filename = "hero" . "." . $extension;
+            $filename = date('YmdHis') . "." . $extension;
             $file->move("image/", $filename);
             $data->image = $filename;
         }
@@ -112,7 +112,7 @@ class AdminController extends Controller
        if($request->hasFile("image")){
             $file = $request->file("image");
             $extension = $file->getClientOriginalExtension();
-            $filename = "hero" . "." . $extension;
+            $filename = date('YmdHis') . "." . $extension;
             $file->move("image/", $filename);
             $skills->image = $filename;
         }
@@ -130,7 +130,7 @@ class AdminController extends Controller
         if($request->hasFile("image")){
              $file = $request->file("image");
              $extension = $file->getClientOriginalExtension();
-             $filename = "hero" . "." . $extension;
+             $filename = date('YmdHis') . "." . $extension;
              $file->move("image/", $filename);
              $skills->image = $filename;
          }
@@ -203,7 +203,6 @@ class AdminController extends Controller
 
             return redirect()->back()->with("success", "Serviço Cadastrado");
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->back()->with("error", "Noão é possivel");
 
         }
