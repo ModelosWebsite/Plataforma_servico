@@ -19,6 +19,6 @@ class pacote extends Model
 
     public function company()
     {
-        return $this->belongsTo(company::class, 'id');
+        return $this->belongsTo(company::class);
     }
 }

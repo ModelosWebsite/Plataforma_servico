@@ -39,17 +39,15 @@
                                             <th>Empresa</th>
                                             <th>Pacote</th>
                                             <th>Status</th>
-                                            <th>Contacto</th>
                                             <th>Acção</th>
                                         </thead>
                                         <tbody>
                                             @foreach ($pacotes as $pacote)
                                                <tr>
                                                     <td>{{$pacote->id}}</td>
-                                                    <td>{{$pacote->company->companyname}}</td>
+                                                    <td>{{$pacote->company->companyname ?? ""}}</td>
                                                     <td>{{$pacote->pacote}}</td>
                                                     <td class=" text-capitalize">{{$pacote->status}}</td>
-                                                    <td>{{$pacote->telefone}}</td>
                                                     <td>
 
                                                         <!-- Button trigger modal -->
@@ -71,15 +69,15 @@
                                                                     <form action="{{route("super.admin.pacote.update", $pacote->id)}}" method="post">
                                                                         @csrf
 
-                                                                        <input type="hidden" value="{{$pacote->id}}" name="id">
+                                                                        <input type="hidden" value="{{$pacote->id  ?? ""}}" name="id">
                                                                         <div class="form-group">
                                                                             <label class="form-label" for="company">Nome da Empresa</label>
-                                                                            <input class="form-control" type="text" value="{{$pacote->company->companyname}}" disabled>
+                                                                            <input class="form-control" type="text" value="{{$pacote->company->companyname ?? ""}}" disabled>
                                                                         </div>
                                                         
                                                                         <div class="form-group">
                                                                             <label class="form-label" for="pacote">Elementos Premium</label>
-                                                                            <input class="form-control" type="text" value="{{$pacote->pacote}}" disabled>
+                                                                            <input class="form-control" type="text" value="{{$pacote->pacote  ?? ""}}" disabled>
                                                                         </div>
 
                                                                         <div class="form-group">
@@ -89,11 +87,6 @@
                                                                                 <option value="premium">Premium</option>
                                                                                 <option value="free">Free</option>
                                                                             </select>
-                                                                        </div>
-                                                        
-                                                                        <div class="form-group">
-                                                                            <label class="form-label" for="pacote">Telefone</label>
-                                                                            <input class="form-control" value="{{$pacote->telefone}}" type="text" name="telefone" placeholder="Insira número de telefone">
                                                                         </div>
                                                         
                                                                         <div class="form-group">

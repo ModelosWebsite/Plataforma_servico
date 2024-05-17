@@ -63,6 +63,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Account -->
+    <li class="nav-item {{Route::current()->getName() == "admin.account.view" ? "bg-white" : ""}}">
+        <a class="nav-link {{Route::current()->getName() == "admin.account.view" ? "text-primary" : ""}}" href="{{route("admin.account.view")}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Minha Conta</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{route("anuncio.logout")}}">

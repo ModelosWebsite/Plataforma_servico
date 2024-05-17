@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{About, Color, Detail,footer, Hero, service};
+use App\Models\{About, Color, Detail, Documentation, footer, Hero, service};
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -185,8 +185,10 @@ class AdminController extends Controller
     //services
     public function viewservice(){
         $company_id = auth()->user()->company_id;
+        $service = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "SERVIÇOS")->get();
         $data = Service::where("company_id", $company_id)->get();
-        return view("sbadmin.service", compact("data"));
+        return view("sbadmin.service", compact("data", "service"));
     }
 
     public function storeservice(Request $request){
@@ -221,7 +223,9 @@ class AdminController extends Controller
     //Alteração de cores nos websites
     public function colorview(){
         $colors = Color::all();
-        return view("sbadmin.color", compact("colors"));
+        $color = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "CORES")->get();
+        return view("sbadmin.color", compact("colors", "color"));
     }
 
     public function storecolor(Request $request){

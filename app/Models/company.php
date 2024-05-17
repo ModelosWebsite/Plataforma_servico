@@ -16,6 +16,6 @@ class company extends Model
 
     public function pacote()
     {
-        return $this->hasMany(pacote::class, 'company_id', 'id');
+        return $this->hasMany(pacote::class);
     }
 }

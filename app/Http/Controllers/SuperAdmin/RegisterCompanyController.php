@@ -16,7 +16,7 @@ class RegisterCompanyController extends Controller
         $companies = company::all();
         return view("superadmin.company.account", ["companies" => $companies]);
     }
-    
+
     public function companyRegister(Request $request) {
         // Validation
         $validatedData = $request->validate([
@@ -54,6 +54,39 @@ class RegisterCompanyController extends Controller
             DB::rollBack();
             return redirect()->back()->with("error", "Erro ao adicionar empresa: " . $th->getMessage());
         }
+    }
+
+    public function updateCompany(Request $request){
+        // Validation
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:companies,companyemail',
+            'nif' => 'required|string|unique:companies,companynif',
+            'type' => 'required|string',
+        ]);
+    
+        DB::beginTransaction();
+        try {
+    
+            $company = company::find($request->id);
+            $company->companyname = $validatedData['name'];
+            $company->companyemail = $validatedData['email'];
+            $company->companynif = $validatedData['nif'];
+            $company->companybusiness = $validatedData['type'];
+            $company->update();
+    
+            DB::commit();
+    
+            return redirect()->back()->with("success", "Empresa Adicionada");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with("error", "Erro ao adicionar empresa: ");
+        }
+    }
+
+    public function deleteCompany($id){
+        company::find($id)->delete();
+        return redirect()->back();
     }
     
 }

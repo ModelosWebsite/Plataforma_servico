@@ -64,7 +64,6 @@
           <h2>
              Nossos <span>Serviços</span>
           </h2>
-
         </div>
         <div class="row">
           @foreach ($service as $item)
@@ -136,7 +135,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-5 offset-md-1">
+        <div class="col-lg-7 col-md-7 offset-md-1">
           <div class="form_container contact-form">
             <form action="">
               <div>
@@ -159,10 +158,29 @@
             </form>
           </div>
         </div>
-        <div class="col-lg-7 col-md-6 px-0">
+        <div class="col-lg-3 col-md-3 px-0">
           <div class="map_container">
             <div class="map">
-              <div id="googleMap"></div>
+              <div class="container-fluid px-3 px-md-3 px-lg-4">
+                <div class="position-relative">
+                  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      @foreach ($apiArray as $anuncio)
+                      <div class="carousel-item active">
+                          @if ($anuncio["tipo"] === "Quadrado")
+                            <a href="{{$anuncio["link"] ?? NULL}}" target="_blank">
+                              <div>
+                                <img src="{{url("{$anuncio["image_full_url"]}")  ?? NULL}}" alt="" style="height: 25rem; width: 20rem">
+                                <div style="position: absolute; top:5px; width:10px; height: 10px; right:28px;"><i class="bi bi-info-circle-fill cursor-pointer" style="color: #ffffff" title="Está Publicidade é de inteira responsabilidade da Fort-Code"></i></div>
+                              </div>
+                            </a>
+                          @endif
+                        </div>
+                        @endforeach
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -181,7 +199,6 @@
               Contactos
             </h4>
             @foreach ($footer as $item)
-              
             <div class="contact_link_box">
               <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -225,9 +242,11 @@
             <h4>
               Info
             </h4>
-            <p>
-              Aqui vai uma breve descrição da empresa, como um slogam a motivação da empresa
-            </p>
+            @foreach ($texts as $item)
+              <p>
+                {{$item->title}}
+              </p>
+            @endforeach
           </div>
         </div>
         <div class="col-md-6 col-lg-2 mx-auto info_col">
@@ -237,19 +256,19 @@
             </h4>
             <div class="info_links">
               <a class="active" href="#home">
-                <img src="images/nav-bullet.png" alt="">
+                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Home
               </a>
               <a class="" href="#about">
-                <img src="images/nav-bullet.png" alt="">
+                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Sobre
               </a>
               <a class="" href="#service">
-                <img src="images/nav-bullet.png" alt="">
+                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Serviços
               </a>
               <a class="" href="#contact">
-                <img src="images/nav-bullet.png" alt="">
+                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Contactos
               </a>
             </div>
@@ -279,5 +298,4 @@
     </div>
   </section>
   <!-- end info section -->
-
 @endsection

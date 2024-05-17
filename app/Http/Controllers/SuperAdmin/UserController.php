@@ -13,4 +13,9 @@ class UserController extends Controller
         $users = User::all();
         return view("superadmin.user.main", ["users" => $users]);
     }
+
+    public function deleteUser($id){
+        user::find($id)->delete();
+        return redirect()->back();
+    }
 }

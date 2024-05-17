@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use Illuminate\Support\Facades\Route;
 //Routes do administrador do site para manipulação
 
@@ -40,4 +41,9 @@ Route::middleware("auth")->controller(AdminController::class)->prefix("/admin/")
     Route::get("cor", "colorview")->name("anuncio.management.view.color");
     Route::post("cor/save", "storecolor")->name("anuncio.management.store.color");
     Route::post("cor/actualizar", "selectColor")->name("anuncio.management.actualizar.color");
+});
+
+Route::middleware("auth")->controller(AccountController::class)->group(function(){
+    Route::get("/minha/conta", "index")->name("admin.account.view");
+    Route::post("/conta/dados/save/{id}", "updateProfile")->name("admin.account.store");
 });

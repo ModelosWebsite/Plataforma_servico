@@ -10,6 +10,6 @@ class SuperAdminController extends Controller
 {
     //Chamar a pagina principal do painel
     public function index(){
-        return view("superadmin.home");
+        return view("superadmin.home.home");
     }
 }

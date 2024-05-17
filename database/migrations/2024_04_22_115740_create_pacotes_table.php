@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string("pacote")->nullable();
             $table->enum('status', ['free', 'premium'])->default("free");
-            $table->string("telefone")->nullable();
             $table->foreignIdFor(company::class);
             $table->timestamps();
         });
