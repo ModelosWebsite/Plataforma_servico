@@ -18,57 +18,68 @@
             <span>Dashboard</span>
         </a>
     </li>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Definições</span>
+        </a>
 
-    <li class="nav-item {{(Route::current()->getName() == "admin.view.hero") ? "bg-white" : ""}}">
-        <a class="nav-link {{(Route::current()->getName() == "admin.view.hero") ? "text-primary" : ""}}" href="{{route("admin.view.hero")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Inicial Hero</span>
-        </a>
-    </li>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{(Route::current()->getName() == "admin.view.hero") ? "text-primary" : ""}}" href="{{route("admin.view.hero")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Inicial Hero</span>
+                </a>
 
-    <li class="nav-item {{(Route::current()->getName() == "admin.about") ? "bg-white" : ""}}">
-        <a class="nav-link {{(Route::current()->getName() == "admin.about") ? "text-primary" : ""}}" href="{{route("admin.about")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Sobre</span>
-        </a>
-    </li>
-    
-    <li class="nav-item {{(Route::current()->getName() == "admin.view.services") ? "bg-white" : ""}}">
-        <a class="nav-link {{(Route::current()->getName() == "admin.view.services") ? "text-primary" : ""}}" href="{{route("admin.view.services")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Serviços</span>
-        </a>
-    </li>
+                <a class="collapse-item {{(Route::current()->getName() == "admin.about") ? "text-primary" : ""}}" href="{{route("admin.about")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Sobre</span>
+                </a>
 
-    <li class="nav-item {{(Route::current()->getName() == "admin.footer") ? "bg-white" : ""}}">
-        <a class="nav-link {{(Route::current()->getName() == "admin.footer") ? "text-primary" : ""}}" href="{{route("admin.footer")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Footer</span>
-        </a>
-    </li>
+                <a class="collapse-item {{(Route::current()->getName() == "admin.view.services") ? "text-primary" : ""}}" href="{{route("admin.view.services")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Serviços</span>
+                </a>
 
-    <li class="nav-item {{(Route::current()->getName() == "admin.detail") ? "bg-white" : ""}}">
-        <a class="nav-link {{(Route::current()->getName() == "admin.detail") ? "text-primary" : ""}}" href="{{route("admin.detail")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Secção Start</span>
-        </a>
-    </li>
+                <a class="collapse-item {{(Route::current()->getName() == "admin.footer") ? "text-primary" : ""}}" href="{{route("admin.footer")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Rodapé</span>
+                </a>
 
-        
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{Route::current()->getName() == "anuncio.management.view.color" ? "bg-white" : ""}}">
-        <a class="nav-link {{Route::current()->getName() == "anuncio.management.view.color" ? "text-primary" : ""}}" href="{{route("anuncio.management.view.color")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Cores</span>
-        </a>
-    </li>
+                <a class="collapse-item {{(Route::current()->getName() == "admin.detail") ? "text-primary" : ""}}" href="{{route("admin.detail")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Secção Start</span>
+                </a>
 
-    <!-- Nav Item - Account -->
-    <li class="nav-item {{Route::current()->getName() == "admin.account.view" ? "bg-white" : ""}}">
-        <a class="nav-link {{Route::current()->getName() == "admin.account.view" ? "text-primary" : ""}}" href="{{route("admin.account.view")}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Minha Conta</span>
-        </a>
+                <a class="collapse-item {{Route::current()->getName() == "anuncio.management.view.color" ? "text-primary" : ""}}" href="{{route("anuncio.management.view.color")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Cores</span>
+                </a>
+
+                <a class="collapse-item {{Route::current()->getName() == "admin.panel.question" ? "text-primary" : ""}}" href="{{route("admin.panel.question")}}">
+                    <i class="fa fa-fw fa-tachometer-alt"></i>
+                    <span>Perguntas Frequentes</span>
+                </a>
+
+                <a class="collapse-item" href="#" data-toggle="modal" data-target="#help">
+                    <i class="fa fa-fw fa-tachometer-alt"></i>
+                    <span>Ajuda</span>
+                </a>
+
+                <a class="collapse-item {{Route::current()->getName() == "admin.config.view" ? "text-primary" : ""}}" href="{{route("admin.config.view")}}">
+                    <i class="fa fa-fw fa-tachometer-alt"></i>
+                    <span>Configurações</span>
+                </a>
+
+                <a class="collapse-item {{Route::current()->getName() == "admin.account.view" ? "text-primary" : ""}}" href="{{route("admin.account.view")}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Minha Conta</span>
+                </a>
+
+            </div>
+        </div>
     </li>
 
     <!-- Nav Item - Dashboard -->

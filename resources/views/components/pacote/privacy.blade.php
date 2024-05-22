@@ -1,19 +1,15 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title fs-5" id="exampleModalLabel">Modo de Uso</h3>
+          <h4 class="modal-title" id="exampleModalLabel">Politicas de Privacidades da Entidade {{$name->companyname}}, NIF: {{$name->companynif}}</h4>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            @foreach ($start as $data)
-                <h5>{{$data->action}}</h5>
-                @foreach ($data->infos as $item)
-                    <p>{{$item->description}}</p>
-                @endforeach
-            @endforeach
+          <p class="text-dark text-justify fs-6">{{isset($termos->privacy) ? $termos->privacy : ""}}</p>
         </div>
       </div>
     </div>
-</div>
+  </div>
+  

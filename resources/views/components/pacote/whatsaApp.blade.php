@@ -7,9 +7,6 @@
 </div>
 
 <style>
-
-
-
 #pacote {
     position: fixed;
     width: 60px;

@@ -2,6 +2,7 @@
 @section("title", "Painel Administrativo")
 @section("content")
 @include("sbadmin.includes.sidebar")
+@include("sbadmin.help.App")
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->

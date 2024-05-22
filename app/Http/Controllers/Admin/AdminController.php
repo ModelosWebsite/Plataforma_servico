@@ -15,8 +15,10 @@ class AdminController extends Controller
 
     public function heroview(){
         $company_id = auth()->user()->company_id;
+        $datas = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "INICIAL")->get();
         $hero = hero::where("company_id", $company_id)->get();
-        return view("sbadmin.section1", compact("hero"));
+        return view("sbadmin.section1", compact("hero", "datas"));
     }
  
     public function registerdatas(Request $request){
@@ -63,9 +65,10 @@ class AdminController extends Controller
     //Imformações do footer Painel Admin
     public function footer(){
         $company_id = auth()->user()->company_id;
-
+        $rodape = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "RODAPE")->get();
         $footer = footer::where("company_id", $company_id)->get();
-        return view("sbadmin.footer", compact("footer"));
+        return view("sbadmin.footer", compact("footer", "rodape"));
     }
 
     public function contactStore(Request $request){
@@ -96,8 +99,10 @@ class AdminController extends Controller
     //Infromações sobre os detalhes
     public function detailview(){
         $company_id = auth()->user()->company_id;
+        $start = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "ELEMENTOS")->get();
         $skills = Detail::where("company_id", $company_id)->get();
-        return view("sbadmin.skill", compact("skills"));
+        return view("sbadmin.skill", compact("skills", "start"));
     }
 
     public function storeDetail(Request $request){
@@ -141,8 +146,10 @@ class AdminController extends Controller
      //Imformações sobre o site OU Sobre
     public function about(){
         $company_id = auth()->user()->company_id;
+        $databout = Documentation::where("panel", "PAINEL DO ADMINISTRADOR")
+        ->where("section", "SOBRE")->get();
         $data = About::where("company_id", $company_id)->get();
-        return view("sbadmin.about", ["data" => $data]);
+        return view("sbadmin.about", compact("databout", "data"));
     }
     
     public function storeAbout(Request $request){

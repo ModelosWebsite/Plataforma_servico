@@ -2,6 +2,7 @@
 @section("title", "Painel Admin - Hero")
 @section("content")
 @include("sbadmin.documentation.account.App")
+@include("sbadmin.help.App")
 
     {{-- side bar --}}
     @include("sbadmin.includes.sidebar")

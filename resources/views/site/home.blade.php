@@ -3,6 +3,10 @@
 @section("content")
 @include("components.color")
 
+  <!-- Button trigger modal termos de cprivacidades e condições-->
+  @include("components.pacote.privacy")
+  @include("components.pacote.conditions")
+
   @if ((isset($pacotes->status) ? $pacotes->status : "") === "premium")
     @include("components.pacote.whatsaApp")
   @endif
@@ -247,6 +251,12 @@
                 {{$item->title}}
               </p>
             @endforeach
+            <a type="button" class="text-white" data-toggle="modal" data-target="#exampleModal">
+              Politicas de Privacidade |  
+            </a>
+            <a type="button" class="text-white" data-toggle="modal" data-target="#conditions">
+              Termos e Condições  
+            </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-2 mx-auto info_col">
