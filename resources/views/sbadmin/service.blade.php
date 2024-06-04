@@ -37,12 +37,12 @@
                                         <form action="{{route("admin.store.service")}}" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <label class="form-label">Nome do serviço</label>
+                                                <label class="form-label">Nome do serviço (30 Caracteres)</label>
                                                 <input type="text" class="form-control" name="title" placeholder="Insira o nome de um serviço...">
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="form-label">Descrição: </label>
+                                                <label class="form-label">Descrição: (90 á 100 Caracteres)</label>
                                                 <input type="text" class="form-control" name="description" placeholder="Descreva o seu serviço...">
                                             </div>
 
