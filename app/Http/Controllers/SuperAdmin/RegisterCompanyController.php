@@ -37,6 +37,13 @@ class RegisterCompanyController extends Controller
             $company->companynif = $validatedData['nif'];
             $company->companybusiness = $validatedData['type'];
             $company->companyhashtoken = $tokenCompany;
+            
+            if ($image = $request->file('logotipo')) {
+                $destinationPath = 'image/';
+                $profileImage = rand(2000, 3000) . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $company->logotipo = $profileImage;
+            }
             $company->save();
     
             $user = new User();
@@ -73,6 +80,12 @@ class RegisterCompanyController extends Controller
             $company->companyemail = $validatedData['email'];
             $company->companynif = $validatedData['nif'];
             $company->companybusiness = $validatedData['type'];
+            if ($image = $request->file('image')) {
+                $destinationPath = 'image/';
+                $profileImage = rand(2000, 3000) . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $company->logotipo = $profileImage;
+            }
             $company->update();
     
             DB::commit();

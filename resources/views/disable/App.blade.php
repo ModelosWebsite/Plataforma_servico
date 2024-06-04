@@ -1,5 +1,5 @@
 @extends("layouts.Sbadmin")
-@section("title", "$companyname->companyname - Site indisponivel")
+@section("title", "Site indisponivel")
 @section("content")
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <div class="d-flex justify-conte nt-center" style="margin-top: 15rem;">

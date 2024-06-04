@@ -33,54 +33,48 @@
                             <div class="card-body">
                                 <div>
                                     <div class="accordion" id="accordionExample">
-                                        <div class="card">
-                                          <div class="card-header" id="headingOne">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Habilitar o Site
-                                              </button>
-                                            </h2>
-                                          </div>
-                                      
-                                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <div class="col-6">
-                                                    <form id="statusForm" action="{{ route('admin.update.status.company') }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="status" id="statusCheckbox" {{ $statusSite->status === 'active' ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="statusCheckbox">
-                                                                Ativar/Desativar
-                                                            </label>
-                                                        </div>
-                                                    </form>
-                                                    
-                                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                    <script>
-                                                        $(document).ready(function(){
-                                                            $('#statusCheckbox').change(function(){
-                                                                $('#statusForm').submit();
-                                                            });
-                                                        });
-                                                    </script>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div class="card">
-                                          <div class="card-header" id="headingTwo">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#politica" aria-expanded="false" aria-controls="collapseTwo">
+                                        <p class="d-inline-flex gap-1">
+                                            <h4 class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                              Habilitar Site
+                                            </h4>
+                                            <h4 class="btn" type="button" data-toggle="collapse" data-target="#create" aria-expanded="false" aria-controls="create">
                                                 Cadastrar Politica de Privacidade e Termos e Condições.
-                                              </button>
-                                            </h2>
+                                            </h4>
+                                            <h4 class="btn" type="button" data-toggle="collapse" data-target="#useTerms" aria-expanded="false" aria-controls="useTerms">
+                                                Uso dos Termos
+                                            </h4>
+                                          </p>
+                                          <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                      <div class="col-6">
+                                                          <form id="statusForm" action="{{ route('admin.update.status.company') }}" method="POST">
+                                                              @csrf
+                                                              @method('PUT')
+                                                              <div class="form-check">
+                                                                  <input class="form-check-input" type="checkbox" name="status" id="statusCheckbox" {{ $statusSite->status === 'active' ? 'checked' : '' }}>
+                                                                  <label class="form-check-label" for="statusCheckbox">
+                                                                      Ativar/Desativar
+                                                                  </label>
+                                                              </div>
+                                                          </form>
+                                                          
+                                                          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                          <script>
+                                                              $(document).ready(function(){
+                                                                  $('#statusCheckbox').change(function(){
+                                                                      $('#statusForm').submit();
+                                                                  });
+                                                              });
+                                                          </script>
+                                                      </div>
+                                                </div>
+                                              </div>
                                           </div>
-                                          <div id="politica" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                                          <div class="collapse" id="create">
                                             <div class="card-body">          
                                                 <div class="col-xl-6">
-                                                         <form action="{{route("admin.conditions.create")}}" method="post">
+                                                    <form action="{{route("admin.conditions.create")}}" method="post">
                                                              @csrf
                                                              <div class="">
                                                                  <div class="form-group">
@@ -101,12 +95,11 @@
                                                                  }
                                                              </style>
                             
-                                                         <div class="form-group">
+                                                        <div class="form-group">
                                                              <input type="submit" class="btn btn-primary" value="Cadastrar">
                                                         </div>
-                                                     </form>
+                                                    </form>
                                                 </div>
-
                                             <style>
                                                 .conteudo {
                                                     max-height: 200px;
@@ -116,7 +109,7 @@
                                                     max-height: none;
                                                   }
                                             </style>
-                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                                 <div class="col-xl-12 d-flex">    
                                                     <div class="form-group conteudo" id="">
@@ -153,43 +146,12 @@
                                                         });
                                                     });
                                                 </script>
-
-                                            </div>
                                           </div>
-                                        </div>
 
-                                        <div class="card">
-                                          <div class="card-header" id="headingThree">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                Uso dos Termos
-                                              </button>
-                                            </h2>
-                                          </div>
-                                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <form id="status" action="{{ route('items.updateStatus') }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="status" id="statusCheckBook" {{ isset($termos->status) === 'active' ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="statusCheckBook">
-                                                            Ativar/Desativar
-                                                        </label>
-                                                    </div>
-                                                </form>
+                                          <div class="collapse" id="useTerms">
                                                 
-                                                <script>
-                                                    $(document).ready(function(){
-                                                        $('#statusCheckBook').change(function(){
-                                                            $('#status').submit();
-                                                        });
-                                                    });
-                                                </script>
-                                            </div>
                                           </div>
-                                        </div>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

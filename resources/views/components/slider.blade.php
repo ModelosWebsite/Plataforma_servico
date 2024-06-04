@@ -13,14 +13,9 @@
                   <h1>
                     {{$item->title}}
                   </h1>
-                  <p>
+                  <p style="font-size: 1.5rem">
                     {{$item->description}}
                   </p>
-                  <div class="btn-box">
-                    <a href="" class="btn1">
-                      Solicitar
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

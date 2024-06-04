@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{route("super.admin.register.company")}}" method="post">
+            <form action="{{route("super.admin.register.company")}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="form-label">Nome da Empresa</label>
@@ -27,6 +27,11 @@
                 <div class="form-group">
                     <label class="form-label">Tipo de Negócio</label>
                     <input type="text" name="type" class="form-control" placeholder="Insira o tipo de negócio...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Carregar Logotipo</label>
+                    <input type="file" name="logotipo" class="form-control">
                 </div>
             
                 <div class="form-group">

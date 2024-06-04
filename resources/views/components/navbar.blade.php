@@ -5,9 +5,13 @@
         <div class="container-fluid px-3 px-md-3 px-lg-4">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="">
-              <span>
-                {{isset($data->companyname) ? $data->companyname : ""}}
-              </span>
+              @if ($data->logotipo != null)
+                <img width="50rem" src="{{asset("image/$data->logotipo")}}" alt="">
+              @else
+                <span>
+                  {{isset($data->companyname) ? $data->companyname : ""}}
+                </span>
+              @endif
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

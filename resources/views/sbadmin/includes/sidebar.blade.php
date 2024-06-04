@@ -18,6 +18,13 @@
             <span>Dashboard</span>
         </a>
     </li>
+    <!-- Nav Item - Shopping -->
+    <li class="nav-item {{(Route::current()->getName() == "loja.online") ? "bg-white" : ""}}">
+        <a class="nav-link {{(Route::current()->getName() == "loja.online") ? "text-primary" : ""}}" href="{{route("loja.online")}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Elementos Premium</span>
+        </a>
+    </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

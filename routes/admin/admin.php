@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ConditionsController;
 use App\Http\Controllers\Admin\ConfigSiteController;
 use App\Http\Controllers\Admin\QuestionCOntroller;
+use App\Http\Controllers\Admin\ShoopingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth")->prefix("/admin/")->group(function(){
@@ -63,5 +64,11 @@ Route::middleware("auth")->prefix("/admin/")->group(function(){
 
     Route::controller(QuestionCOntroller::class)->group(function(){
         Route::get("/perguntas/frequentes", "index")->name("admin.panel.question");
+    });
+
+    Route::controller(ShoopingController::class)->group(function(){
+        Route::get("/elementos/premium", "index")->name("loja.online");
+        Route::get("/add/cart/{id}", "addCart")->name("loja.add.cart");
+        Route::get("/lista/Carrinho/", "getTotalCart")->name("loja.get.cart.total");
     });
 });

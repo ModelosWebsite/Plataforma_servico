@@ -71,8 +71,8 @@
         </div>
         <div class="row">
           @foreach ($service as $item)
-          <div class="col-md-6 ">
-            <div class="box ">
+          <div class="col-md-6">
+            <div class="box">
               <div class="img-box">
                 <img src="{{url("site/images/service.svg")}}" alt="">
               </div>
@@ -83,7 +83,6 @@
                 <p>
                   {{$item->description}}
                 </p>
-               
               </div>
             </div>
           </div>
@@ -93,7 +92,6 @@
     </div>
   </section>
   <!-- end service section -->
-
   <!-- track section -->
   <section class="track_section layout_padding" id="start">
     <div class="track_bg_box">
@@ -112,12 +110,12 @@
           <p>
             {{$item->description}}
           </p>
-          <form action="">
+          {{-- <form action="">
             <input type="text" placeholder="Inscreva-se o seu email para mais novidades" />
             <button type="submit">
               Enviar
             </button>
-          </form>
+          </form> --}}
         </div>
         @endforeach
 
@@ -130,60 +128,22 @@
   <section class="contact_section mt-5" id="contact">
     <div class="container-fluid px-3 px-md-3 px-lg-4">
       <div class="row">
-        <div class="col-lg-4 col-md-5 offset-md-1">
-          <div class="heading_container">
-            <h2>
-              Contacte-nos
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-7 col-md-7 offset-md-1">
-          <div class="form_container contact-form">
-            <form action="">
-              <div>
-                <input type="text" placeholder="Insira seu Nome" />
-              </div>
-              <div>
-                <input type="text" placeholder="Numero de Telefone" />
-              </div>
-              <div>
-                <input type="email" placeholder="Seu Email" />
-              </div>
-              <div>
-                <input type="text" class="message-box" placeholder="EScreva aqui a sua mensagem..." />
-              </div>
-              <div class="btn_box">
-                <button>
-                  ENVIAR
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-3 px-0">
-          <div class="map_container">
-            <div class="map">
-              <div class="container-fluid px-3 px-md-3 px-lg-4">
-                <div class="position-relative">
-                  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      @foreach ($apiArray as $anuncio)
-                      <div class="carousel-item active">
-                          @if ($anuncio["tipo"] === "Quadrado")
-                            <a href="{{$anuncio["link"] ?? NULL}}" target="_blank">
-                              <div>
-                                <img src="{{url("{$anuncio["image_full_url"]}")  ?? NULL}}" alt="" style="height: 25rem; width: 20rem">
-                                <div style="position: absolute; top:5px; width:10px; height: 10px; right:28px;"><i class="bi bi-info-circle-fill cursor-pointer" style="color: #ffffff" title="Está Publicidade é de inteira responsabilidade da Fort-Code"></i></div>
-                              </div>
-                            </a>
-                          @endif
+        <div class="container-fluid px-3 px-md-3 px-lg-4">
+          <div class="position-relative">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                @foreach ($apiArray as $anuncio)
+                <div class="carousel-item active">
+                    @if ($anuncio["tipo"] === "Horizontal")
+                      <a href="{{$anuncio["link"] ?? NULL}}" target="_blank">
+                        <div>
+                          <img src="{{url("{$anuncio["image_full_url"]}")  ?? NULL}}" alt="" width="100%">
+                          <div style="position: absolute; top:5px; width:10px; height: 10px; right:28px;"><i class="bi bi-info-circle-fill cursor-pointer" style="color: #ffffff" title="Está Publicidade é de inteira responsabilidade da Fort-Code"></i></div>
                         </div>
-                        @endforeach
-                    </div>
+                      </a>
+                    @endif
                   </div>
-                </div>
+                  @endforeach
               </div>
             </div>
           </div>
@@ -226,7 +186,7 @@
             @endforeach
 
           </div>
-          <div class="info_social">
+          {{-- <div class="info_social">
             <a href="">
               <i class="fa fa-facebook" aria-hidden="true"></i>
             </a>
@@ -239,7 +199,7 @@
             <a href="">
               <i class="fa fa-instagram" aria-hidden="true"></i>
             </a>
-          </div>
+          </div> --}}
         </div>
         <div class="col-md-6 col-lg-3 info_col">
           <div class="info_detail">
@@ -266,20 +226,19 @@
             </h4>
             <div class="info_links">
               <a class="active" href="#home">
-                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Home
               </a>
               <a class="" href="#about">
-                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Sobre
               </a>
               <a class="" href="#service">
-                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Serviços
               </a>
               <a class="" href="#contact">
-                <img src="{{asset("/site/images/next.png")}}" alt="">
                 Contactos
+              </a>
+              <a class="" href="{{route("anuncio.login.view")}}">
+                Login
               </a>
             </div>
           </div>
