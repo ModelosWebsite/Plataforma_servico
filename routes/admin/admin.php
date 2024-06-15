@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ConditionsController;
 use App\Http\Controllers\Admin\ConfigSiteController;
 use App\Http\Controllers\Admin\QuestionCOntroller;
 use App\Http\Controllers\Admin\ShoopingController;
+use App\Http\Controllers\Admin\StatusDeliveryController;
+use App\Livewire\Site\DeliveryStatusComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth")->prefix("/admin/")->group(function(){
@@ -71,4 +73,10 @@ Route::middleware("auth")->prefix("/admin/")->group(function(){
         Route::get("/add/cart/{id}", "addCart")->name("loja.add.cart");
         Route::get("/lista/Carrinho/", "getTotalCart")->name("loja.get.cart.total");
     });
+
+    Route::controller(StatusDeliveryController::class)->group(function(){
+        Route::get("/delivery/status", "index")->name("plataform.serv.admin.delivery.status");
+    });
+
+    Route::get("/encomenda/estado/{id}", DeliveryStatusComponent::class)->name("delivery.status");
 });

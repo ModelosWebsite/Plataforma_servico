@@ -31,6 +31,7 @@
 
   <!-- hero section -->
   @include("components.navbar")
+  <!-- End hero section -->
   
   <!-- content center section -->
   @yield("content")
@@ -39,7 +40,7 @@
   <!-- footer section -->
   @include("components.footer")
   <!-- footer section -->
-
+  
   <!-- jQery -->
   <script type="text/javascript" src="{{url("site/js/jquery-3.4.1.min.js")}}"></script>
   <!-- popper js -->

@@ -1,12 +1,12 @@
 <div>
     <main id="main" style="margin-top: 5rem;">
         <section class="shopping-cart spad">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="shopping__cart__table">
                             <table>
-                                <thead style="background: #6081E1;">
+                                <thead style="background: #F4C400;">
                                     <tr class="p-5 m-5">
                                         <th>Produto</th>
                                         <th>Quantidade</th>
@@ -24,7 +24,7 @@
                                                             src="https://kytutes.com/storage/{{ $item->attributes['image'] }}"
                                                             class="img-fluid" alt="">
                                                     @else
-                                                        <img style="width: 80px" src="/storage/notfound.png"
+                                                        <img style="width: 80px" src="{{ asset("notfound.svg") }}"
                                                             class="img-fluid" alt="">
                                                     @endif
                                                 </div>
@@ -37,7 +37,7 @@
                                                 <div class="quantity">
                                                     <div class="pro-qty-2">
                                                         <input class="quantity-input" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQuantity('{{ $item->id }}', $event.target.value)">
-</td>                                               </div>
+                                                    </td></div>
                                                 </div>
                                             </td>
                                             <td class="cart__price">
@@ -60,23 +60,17 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="continue__btn">
-                                    <a href="{{route("loja.online")}}" style="border: 1px solid #6081E1;">Continuar
+                                    <a href="" style="border: 1px solid #F4C400;">Continuar
                                         Comprar</a>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="continue__btn update__btn">
-                                    <a href="#" style="background: #F4C400; color:#fff; border: none;"><i
-                                            class="fa fa-spinner"></i>Actualizar Carrinho</a>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="cart__discount">
                             <form wire:submit.prevent='cuponDiscount'>
                                 <input required type="text" wire:model="code" name="cupon" placeholder="Insira o codigo do cupon">   
-                                <button  type="submit" style="background: #6081E1; color:#fff; border: none;">Aplicar</button>
+                                <button  type="submit" style="background: #F4C400; color:#fff; border: none;">Aplicar</button>
                             </form>
                         </div>
                         <div class="cart__total">
@@ -88,11 +82,21 @@
                                 <li>Taxa PB <span>{{ number_format($taxapb, 2, ',', '.') }} Kz</span> </li>
                                 <li>Total <span id="total">{{number_format($totalFinal - session("discountvalue"), 2, ',', '.')}} kz</span></li>
                             </ul>
-
-                            <button  id="getLocationButton" class="primary-btn btn btn-primary mt-2"
-                                style="background:#6081E1; color:#fff; border: none;" data-toggle="modal"
+                            {{-- @if (isset($locations) and $locations->count() > 0)
+                                @foreach ($locations as $key => $item)
+                                    <div class="form-check">
+                                        <input wire:click="selectLocation({{ $item['price'] }})" class="form-check-input checked"
+                                            type="radio" id="flexRadioDefault{{ $key + 1 }}" name="location" value="{{ $item['price'] }}">
+                                        <label class="form-check-label" for="flexRadioDefault{{ $key + 1 }}" style="cursor: pointer">
+                                            {{ $item['location'] }} - {{ $item['price'] }} kz
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif --}}
+                            <button type="button" class="primary-btn btn btn-primary mt-2"
+                                style="background: #F4C400; color:#fff; border: none;" data-toggle="modal"
                                 data-target="#checkout">Finalizar Compra</button>
-                             @include('sbadmin.shooping.checkout.App')
+                            @include('site.shopping.finalizar.App')
                         </div>
                     </div>
                 </div>
@@ -100,11 +104,7 @@
         </section>
     </main>
 
-<style>
-        /*---------------------
-          Shopping Cart
-        -----------------------*/
-        
+    <style>
         .shopping__cart__table {
             margin-bottom: 30px;
         }

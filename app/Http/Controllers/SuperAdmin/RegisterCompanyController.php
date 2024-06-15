@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SuperAdmin\CompanyRequest;
 use App\Models\{company, User};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,26 +18,20 @@ class RegisterCompanyController extends Controller
         return view("superadmin.company.account", ["companies" => $companies]);
     }
 
-    public function companyRegister(Request $request) {
-        // Validation
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:companies,companyemail',
-            'nif' => 'required|string|unique:companies,companynif',
-            'type' => 'required|string',
-        ]);
+    public function companyRegister(CompanyRequest $request) {
     
         DB::beginTransaction();
         try {
             // Create token for company
-            $tokenCompany = $validatedData['name']. rand(2000, 3000);
+            $tokenCompany = $request->name. rand(2000, 3000);
     
             $company = new Company();
-            $company->companyname = $validatedData['name'];
-            $company->companyemail = $validatedData['email'];
-            $company->companynif = $validatedData['nif'];
-            $company->companybusiness = $validatedData['type'];
+            $company->companyname = $request->name;
+            $company->companyemail = $request->email;
+            $company->companynif = $request->nif;
+            $company->companybusiness = $request->type;
             $company->companyhashtoken = $tokenCompany;
+            $company->companytokenapi = $request->apitoken;
             
             if ($image = $request->file('logotipo')) {
                 $destinationPath = 'image/';
@@ -47,8 +42,8 @@ class RegisterCompanyController extends Controller
             $company->save();
     
             $user = new User();
-            $user->name = $validatedData['name'];
-            $user->email = $validatedData['email'];
+            $user->name = $request->name;
+            $user->email = $request->email;
             $user->password = Hash::make('f0rtc0d3'); 
             $user->role = "Administrador";
             $user->company_id = $company->id;

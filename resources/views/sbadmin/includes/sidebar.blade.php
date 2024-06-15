@@ -25,6 +25,14 @@
             <span>Elementos Premium</span>
         </a>
     </li>
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item {{(Route::current()->getName() == "plataform.serv.admin.delivery.status") ? "bg-white" : ""}}">
+            <a class="nav-link {{(Route::current()->getName() == "plataform.serv.admin.delivery.status") ? "text-primary" : ""}}" href="{{route("plataform.serv.admin.delivery.status")}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Estado Encomenda</span>
+            </a>
+        </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

@@ -7,9 +7,11 @@
   @include("components.pacote.privacy")
   @include("components.pacote.conditions")
 
-  @if ((isset($pacotes->status) ? $pacotes->status : "") === "premium")
+
+  @if ($WhatsApp && $WhatsApp->status === "premium")
     @include("components.pacote.whatsaApp")
   @endif
+
 
   <!-- about section -->
     <section class="about_section layout_padding-bottom mt-5" id="about">

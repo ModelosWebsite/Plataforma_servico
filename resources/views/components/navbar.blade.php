@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#about"> Sobre</a>
@@ -29,6 +29,14 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#service">Serviços</a>
                 </li>
+                @if ($packges && $packges->status === "premium" && $packges->pacote === "Shopping")
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route("platafom.service.product.list", ["company" => $data->companyhashtoken])}}">Produtos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route("plataform.service.get.status")}}">Encomenda </a>
+                  </li>
+                @endif
                 <li class="nav-item">
                   <a class="nav-link" href="#contact">Contacto </a>
                 </li>
@@ -41,6 +49,16 @@
     <!-- end header section -->
 
     <!-- slider section -->
-    @include("components.slider")
+    @if (Route::current()->getName() == "site.index")
+      @include("components.slider")
+    @endif
+
+    @if (Route::current()->getName() == "platafom.service.product.list")
+      @include("components.welcome")
+    @endif
+
+    @if (Route::current()->getName() == "plataform.service.get.cart")
+      @include("components.checkout")
+    @endif
     <!-- end slider section -->
   </div>

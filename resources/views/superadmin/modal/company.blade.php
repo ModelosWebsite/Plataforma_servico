@@ -11,22 +11,31 @@
                 @csrf
                 <div class="form-group">
                     <label class="form-label">Nome da Empresa</label>
-                    <input type="text" name="name" class="form-control" placeholder="Insira o nome da empresa...">
+                    <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Insira o nome da empresa...">
+                    @error('name') <span>{{ $message }}</span> @enderror
                 </div>
+                
 
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Insira o email...">
+                    <input type="email" value="{{old("email")}}" name="email" class="form-control" placeholder="Insira o email...">
+                    @error("email") <span> {{ $message}} </span>  @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">NIF</label>
-                    <input type="text" name="nif" class="form-control" placeholder="Insira o nif...">
+                    <input type="text" value="{{old("nif")}}" name="nif" class="form-control" placeholder="Insira o nif...">
+                    @error("nif") <span> {{ $message}} </span>  @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Tipo de Negócio</label>
                     <input type="text" name="type" class="form-control" placeholder="Insira o tipo de negócio...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Token Loja Online</label>
+                    <input type="text" name="apitoken" class="form-control" placeholder="Insira o token de acesso da loja online...">
                 </div>
 
                 <div class="form-group">

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\{WithFileUploads,WithPagination};
 
-
 class CartComponent extends Component
 {
     use WithFileUploads,WithPagination;
@@ -94,7 +93,8 @@ class CartComponent extends Component
     }
 
     //logica para aplicar cupon de desconto
-    public function cuponDiscount(){   
+    public function cuponDiscount()
+    {   
         //Acesso a API com um token
         $headers = [
             "Accept" => "application/json",
@@ -167,11 +167,18 @@ class CartComponent extends Component
         ->post("https://kytutes.com/api/deliveries",$data);
 
         $result  = collect(json_decode($response));
+        if ($result) {
+            session()->put("idDelivery", $result['reference']);
+        }
         $this->alert('success', 'Encomenda Finalizada');
-        return redirect()->back();
+
+        return redirect()->route("delivery.status",[
+            $result['reference']
+        ]);
 
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            $this->alert("error", "Falha na encomenda");
+            return redirect()->back();
         }
     }
 }

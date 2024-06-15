@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ShoopingController extends Controller
 {
@@ -82,7 +83,9 @@ class ShoopingController extends Controller
                     'image' => $data[0]["imagem"]
                 )
             ));
-            return redirect()->back()->with("success", "Adicionado");
+
+            Alert::success("Adicionado");
+            return redirect()->back();
          }
     }
 
@@ -134,7 +137,8 @@ class ShoopingController extends Controller
             ));
         }
         } catch (\Throwable $th) {
-            return redirect()->back()->with("error", "Falha ao carregar dados");
+            Alert::error("Falha ao carregar dados");
+            return redirect()->back();
 
         }
     }
