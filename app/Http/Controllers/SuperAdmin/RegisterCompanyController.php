@@ -59,28 +59,23 @@ class RegisterCompanyController extends Controller
     }
 
     public function updateCompany(Request $request){
-        // Validation
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:companies,companyemail',
-            'nif' => 'required|string|unique:companies,companynif',
-            'type' => 'required|string',
-        ]);
-    
         DB::beginTransaction();
         try {
     
             $company = company::find($request->id);
-            $company->companyname = $validatedData['name'];
-            $company->companyemail = $validatedData['email'];
-            $company->companynif = $validatedData['nif'];
-            $company->companybusiness = $validatedData['type'];
+            $company->companyname = $request->name;
+            $company->companyemail = $request->email;
+            $company->companynif = $request->nif;
+            $company->companybusiness = $request->type;
+            $company->companytokenapi = $request->apitoken;
+            
             if ($image = $request->file('image')) {
                 $destinationPath = 'image/';
                 $profileImage = rand(2000, 3000) . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $profileImage);
                 $company->logotipo = $profileImage;
             }
+
             $company->update();
     
             DB::commit();

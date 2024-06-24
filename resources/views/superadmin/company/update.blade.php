@@ -11,22 +11,27 @@
                 @csrf
                 <div class="form-group">
                     <label class="form-label">Nome da Empresa</label>
-                    <input type="text" name="name" class="form-control" placeholder="Insira o nome da empresa...">
+                    <input type="text" value="{{$company->companyname}}" name="name" class="form-control" placeholder="Insira o nome da empresa...">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Insira o email...">
+                    <input type="email" name="email" value="{{$company->companyemail}}" class="form-control" placeholder="Insira o email...">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">NIF</label>
-                    <input type="text" name="nif" class="form-control" placeholder="Insira o nif...">
+                    <input type="text" name="nif" value="{{$company->companynif}}" class="form-control" placeholder="Insira o nif...">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Tipo de Negócio</label>
-                    <input type="text" name="type" class="form-control" placeholder="Insira o tipo de negócio...">
+                    <input type="text" name="type" value="{{$company->companybusiness}}" class="form-control" placeholder="Insira o tipo de negócio...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Token Api</label>
+                    <input type="text" name="apitoken" class="form-control" placeholder="Insira token da api...">
                 </div>
             
                 <div class="form-group">
