@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Shopping;
 
+use App\Mail\Site\SendEmail;
+use App\Models\company;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -20,7 +23,10 @@ class Cart extends Component
     //propriedades de checkout
     public $name, $lastname, $province, $municipality, $street, $phone, $otherPhone,
     $email, $deliveryPrice =0, $paymentType ="Trasnferencia",  $taxPayer,$receipt,$otherAddress;
-    
+    public $company;
+
+    protected $listeners = ["updateQuantity"];
+
     public function render()
     {
         try {
@@ -80,93 +86,113 @@ class Cart extends Component
         $this->localizacao = $price;
     }
 
-        //logica para aplicar cupon de desconto
-        public function cuponDiscount()
-        {   
-            //Acesso a API com um token
-            $headers = [
-                "Accept" => "application/json",
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
-            ];
+    //logica para aplicar cupon de desconto
+    public function cuponDiscount()
+    {   
+        //Acesso a API com um token
+        $headers = [
+            "Accept" => "application/json",
+            "Content-Type" => "application/json",
+            "Authorization" => $this->apitoken,
+        ];
         
-            $response = Http::withHeaders($headers)
-            ->post("https://kytutes.com/api/cupons",[
-                "code"=>$this->code,
-                "total"=>$this->totalFinal,
-            ]);
-            $cupon = collect(json_decode($response));
+        $response = Http::withHeaders($headers)
+        ->post("https://kytutes.com/api/cupons",[
+            "code"=>$this->code,
+            "total"=>$this->totalFinal,
+        ]);
+        $cupon = collect(json_decode($response));
           
-          
-            if (isset($cupon['discount'])) {
-                session()->put('discountvalue',$cupon['discount']);
-                $this->code = "";
-            }
+        if (isset($cupon['discount'])) {
+            session()->put('discountvalue',$cupon['discount']);
+            $this->code = "";
         }
+    }
     
-        public function checkout()
-        {
-            try {
-                //manipulacao de arquivo
+    public function checkout($company)
+    {
+        try {
+                $dataCompany = company::where("companyhashtoken", $company)->firstOrFail();
+                //manipulacao de arquivo;
                 $filaName = null;
                 if ($this->receipt != null and !is_string($this->receipt)) {
                     $filaName = md5($this->receipt->getClientOriginalName())
                                 .".".$this->receipt->getClientOriginalExtension();
                     $this->receipt->storeAs("recibos",$filaName);
                 }
-      
-            //Acesso a API com um token
-            $items = [];
-            if (count(CartFacade::getContent()) > 0) {
-                foreach(CartFacade::getContent() as $key => $item) {
-                   array_push($items,[
-                        "name"=>$item->name,
-                        "price"=>$item->price,
-                        "quantity"=>$item->quantity,
-                   ]);
+        
+                //Acesso a API com um token
+                $items = [];
+                if (count(CartFacade::getContent()) > 0) {
+                    foreach(CartFacade::getContent() as $key => $item) {
+                    array_push($items,[
+                            "name"=>$item->name,
+                            "price"=>$item->price,
+                            "quantity"=>$item->quantity,
+                    ]);
+                    }
                 }
-            }
-         
-            $headers = [
-                "Accept" => "application/json",
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
-            ];
-    
-            $data = [
-                "clientName" => $this->name,
-                "clientLastName" => $this->lastname,
-                "province" => $this->province,
-                "municipality" => $this->municipality,
-                "street" => $this->street,
-                "cupon" => "",
-                "deliveryPrice" => 0,
-                "phone" => $this->phone,
-                "otherPhone" => $this->otherPhone,
-                "email" => $this->email,
-                "taxPayer" => $this->taxPayer,
-                "receipt" => $filaName,
-                "paymentType" => $this->paymentType,
-                "items" => $items,
-            ];
-    
-            //Chamada a API
-            $response = Http::withHeaders($headers)
-            ->post("https://kytutes.com/api/deliveries",$data);
-    
-            $result  = collect(json_decode($response));
-            if ($result) {
-                session()->put("idDelivery", $result['reference']);
-            }
-            $this->alert('success', 'Encomenda Finalizada');
-    
-            return redirect()->route("plataform.service.delivery.status",[
-                $result['reference']
-            ]);
-    
-            } catch (\Throwable $th) {
+            
+                $headers = [
+                    "Accept" => "application/json",
+                    "Content-Type" => "application/json",
+                    "Authorization" => $dataCompany->companytokenapi,
+                ];
+        
+                $data = [
+                    "clientName" => $this->name,
+                    "clientLastName" => $this->lastname,
+                    "province" => $this->province,
+                    "municipality" => $this->municipality,
+                    "street" => $this->street,
+                    "cupon" => "",
+                    "deliveryPrice" => 0,
+                    "phone" => $this->phone,
+                    "otherPhone" => $this->otherPhone,
+                    "email" => $this->email,
+                    "taxPayer" => $this->taxPayer,
+                    "receipt" => $filaName,
+                    "paymentType" => $this->paymentType,
+                    "items" => $items,
+                ];
+        
+                //Chamada a API
+                $response = Http::withHeaders($headers)
+                ->post("https://kytutes.com/api/deliveries",$data);
+
+                $result  = collect(json_decode($response));
+                if ($result) {
+                    session()->put("idDelivery", $result['reference']);
+                    session()->put("companyapi", $dataCompany->companyhashtoken);
+                    //Mail::to($data["email"])->send(new SendEmail($data));
+                }
+
+                $this->alert('success', 'Encomenda Finalizada');
+            
+                return redirect()->route("plataform.service.delivery.status",[
+                    $result['reference']
+                ]);
+        } catch (\Throwable $th) {
                 $this->alert("error", "Falha na encomenda");
                 return redirect()->back();
-            }
         }
+    }
+
+    public function remove($id)
+    {
+        try {
+            $itenDelete = CartFacade::remove($id);
+            $this->alert("success", "Item eliminado");
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function updateQuantity($id, $quantity)
+    {
+        CartFacade::update($id, [
+            'quantity' => 1,
+        ]);
+    }
 }

@@ -35,7 +35,6 @@
                                 <div class="col-xl-12">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="bg-primary text-white">
-                                            <th>#</th>
                                             <th>Empresa</th>
                                             <th>Email</th>
                                             <th>Negócio</th>
@@ -46,7 +45,6 @@
                                         <tbody>
                                             @foreach ($companies as $company)
                                                 <tr>
-                                                    <td>{{$company->id}}</td>
                                                     <td>{{$company->companyname}}</td>
                                                     <td>{{$company->companyemail}}</td>
                                                     <td>{{$company->companybusiness}}</td>

@@ -26,7 +26,6 @@ class PacoteController extends Controller
             $pacote = new pacote();
 
             $pacote->pacote = $request->pacote;
-            $pacote->telefone = $request->telefone;
             $pacote->company_id = $request->company_id;
              
             $pacote->save();
@@ -38,7 +37,6 @@ class PacoteController extends Controller
 
     public function updatePacote(Request $request){
         pacote::where(["id" => $request->id])->update([
-            "telefone" => $request->telefone,
             "status" => $request->status,
             "id" => $request->id,
         ]);

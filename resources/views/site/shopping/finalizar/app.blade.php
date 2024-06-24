@@ -2,7 +2,7 @@
 <div wire:ignore.self class="modal fade" id="checkout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header" style="background: #6081E1; color:#fff;">
+        <div class="modal-header" style="background: var(--background); color:#fff;">
           <h5 class="modal-title" id="exampleModalLabel">FINALIZAR ENCOMENDA</h5>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -10,7 +10,7 @@
           <div>
             <div class="accordion" id="accordionExample">
                 <div class="card">
-                  <div class="card-header" style="background: #6081E1;" id="headingOne">
+                  <div class="card-header" style="background: var(--background);" id="headingOne">
                     <h2 class="mb-0">
                       <button class="btn btn-block text-left" type="button" data-toggle="collapse" style="color: #fff;" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Coordenadas Bancarias
@@ -27,7 +27,7 @@
               </div>
           </div>
 
-          <form  >
+          <form >
             <div class="mt-3">
               <div class="row">
                 <div class="form-group col-md-4">
@@ -99,9 +99,11 @@
              
               </div>
             </div>
+            <h1></h1>
             <div class="modal-footer col-md-12 d-flex justify-content-between align-items-start">
                 <h4>Total: {{number_format(abs($totalFinal), 2, '.', ',')}} Kz</h4>
-                <button class="btn btn-primary text-uppercase text-white" type="button" wire:click='checkout' style="background: #6081E1; color:#fff; border: none;">Encomendar         
+                <button class="btn btn-primary text-uppercase text-white" type="button" wire:click='checkout("{{ session('companytoken') }}")'
+                style="background: var(--background); color:#fff; border: none;">Encomendar         
                 </button>
             </div>
           </form>

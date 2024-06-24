@@ -33,9 +33,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{route("platafom.service.product.list", ["company" => $data->companyhashtoken])}}">Produtos</a>
                   </li>
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a class="nav-link" href="{{route("plataform.service.get.status")}}">Encomenda </a>
-                  </li>
+                  </li> --}}
                 @endif
                 <li class="nav-item">
                   <a class="nav-link" href="#contact">Contacto </a>

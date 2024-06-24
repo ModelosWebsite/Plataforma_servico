@@ -38,4 +38,24 @@
     #contact button{
         background: var(--background);
     }
+
+    /*Estilizaçao personalizada do menu*/
+    #menu .section-header h2{
+        color: var(--background);
+    }
+
+    #menu .container-fluid .menu-item .btn{
+        background: var(--background);
+        border-color: var(--background);
+        cursor: pointer;
+    }
+
+    #cartcout{
+        background: var(--background);
+    }
+
+    /*Estilização do carrinho de compra*/
+    #main .shopping-cart .shopping__cart__table table thead{
+        background: var(--background);
+    }
 </style>
