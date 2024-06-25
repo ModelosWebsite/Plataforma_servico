@@ -5,35 +5,34 @@
   <main id="main">
     <section class="d-flex align-items-center" style="min-height: 100vh;">
         <div class="container py-5">
-            
-            
+                
     <style>
-                input[type="text"] {
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ccc;
-                    border-radius: 4px;
-                }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
                 
-                button {
-                    padding: 10px 20px;
-                    background-color: #007BFF;
-                    color: #fff;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
                 
-                button:hover {
-                    background-color: #0056b3;
-                }
+        button:hover {
+            background-color: #0056b3;
+        }
                 
-                .resultado {
-                    margin-top: 20px;
-                    font-size: 18px;
-                }
+        .resultado {
+            margin-top: 20px;
+            font-size: 18px;
+        }
 
-                .floating-btn {
+        .floating-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -76,6 +75,7 @@
             margin-left: -5px;
         }
     </style> 
+    
 @endsection
 <div class="card border-success mb-3">
     <div class="card-header bg-transparent border-success">

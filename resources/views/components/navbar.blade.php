@@ -24,21 +24,21 @@
                   <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#about"> Sobre</a>
+                  <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}#about"> Sobre</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#service">Serviços</a>
+                  <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}#service">Serviços</a>
                 </li>
                 @if ($packges && $packges->status === "premium" && $packges->pacote === "Shopping")
                   <li class="nav-item">
-                    <a class="nav-link" href="{{route("platafom.service.product.list", ["company" => $data->companyhashtoken])}}">Produtos</a>
+                    <a class="nav-link" href="{{route("platafom.service.product.list", ["company" => $data->companyhashtoken])}}">Loja</a>
                   </li>
                   {{-- <li class="nav-item">
                     <a class="nav-link" href="{{route("plataform.service.get.status")}}">Encomenda </a>
                   </li> --}}
                 @endif
                 <li class="nav-item">
-                  <a class="nav-link" href="#contact">Contacto </a>
+                  <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}#contact">Contacto </a>
                 </li>
               </ul>
             </div>

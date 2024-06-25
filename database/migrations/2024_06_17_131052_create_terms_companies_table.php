@@ -12,12 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('termos', function (Blueprint $table) {
+        Schema::create('terms_companies', function (Blueprint $table) {
             $table->id();
-            $table->text("privacy")->nullable();
-            $table->text("condition")->nullable();
-            $table->enum("status", ["active", "inactive"])->default("inactive");
-            $table->foreignIdFor(company::class)->default(0);
+            $table->longText("term")->nullable();
+            $table->longText("privacity")->nullable();
+            $table->foreignIdFor(company::class);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('termos');
+        Schema::dropIfExists('terms_companies');
     }
 };

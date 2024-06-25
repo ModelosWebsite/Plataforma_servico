@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Termo extends Model
+class TermsCompany extends Model
 {
     use HasFactory;
-
-    protected $table = "Termos";
+    protected $table = "terms_companies";
     protected $primaryKey = "id";
     protected $fillable = [
-        "privacy",
-        "condition",
+        "term",
+        "privacity",
         "company_id"
     ];
-    
 }

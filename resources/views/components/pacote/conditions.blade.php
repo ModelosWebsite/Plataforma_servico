@@ -7,7 +7,13 @@
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p class="text-dark text-justify fs-6">{{isset($termos->condition) ? $termos->condition : ""}}</p>
+          @if (isset($termos))
+            <p style="text-align: justify">
+                {{$termos->term}}
+            </p>
+          @else
+              <p style="text-align: justify">{{ isset($companies->termsPBs->term) ? $companies->termsPBs->term : "" }}</p>
+          @endif
         </div>
       </div>
     </div>

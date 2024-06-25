@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\{About, service, Color, company, Detail, footer, Hero, pacote, Termo};
+use App\Models\{About, service, Color, company, Detail, footer, Hero, pacote, Termpb_has_Company, TermsCompany};
 use Illuminate\Support\Facades\Http;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Support\Facades\Session;
@@ -38,14 +38,10 @@ class SiteController extends Controller
                 $packges = Pacote::where("company_id", $data->id)->first();
     
                 $phonenumber = footer::where("company_id", $data->id)->first();
-    
-                $termo = Termo::where("company_id", $data->id)->first();
-    
-                if ($termo && $termo->status === "active" && $termo->company_id == $data->id) {
-                    $termos = $termo;
-                } else {
-                    $termos = Termo::where("company_id", 0)->first();
-                }
+                
+                $companies = Termpb_has_Company::where("company_id", $data->id)->with('termsPBs')->first();
+
+                $termos = TermsCompany::where("company_id", $data->id)->first();
     
                 $api = Http::post("http://karamba.ao/api/anuncios", ["key" => "wRYBszkOguGJDioyqwxcKEliVptArhIPsNLwqrLAomsUGnLoho"]);
                 $apiArray = $api->json();
@@ -65,6 +61,7 @@ class SiteController extends Controller
                     "name" => $name,
                     "data" => $data,
                     "packges" => $packges,
+                    "companies" => $companies,
                 ]);
             } else {
                 $companyname = company::where("companyhashtoken", $company)->first();
@@ -83,7 +80,8 @@ class SiteController extends Controller
             $color = Color::where("company_id", isset($data->id) ? $data->id : "")->first();
             $packges = pacote::where("company_id", $data->id)->first();
             $texts = Hero::where("company_id", isset($data->id) ? $data->id : "")->get();
-    
+            $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
+
             $curl = curl_init();
     
             curl_setopt_array($curl, [
@@ -116,7 +114,8 @@ class SiteController extends Controller
                     "CollectionsProducts",
                     "packges",
                     "texts",
-                    "color"
+                    "color",
+                    "WhatsApp"
                 ));
             }
         } catch (\Throwable $th) {

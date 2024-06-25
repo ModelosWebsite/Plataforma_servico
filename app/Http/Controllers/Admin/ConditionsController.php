@@ -3,39 +3,52 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Termo;
+use App\Models\company;
+use App\Models\Termpb;
+use App\Models\Termpb_has_Company;
+use App\Models\TermsCompany;
 use Illuminate\Http\Request;
 
 class ConditionsController extends Controller
 {
     //Cadastrar as conditions
-        public function conditionsCreate(Request $request){
+    public function conditionsCreate(Request $request){
+        try {
+            $conditions = new TermsCompany();
+
+            $conditions->privacity = $request->privacity;
+            $conditions->term = $request->term;
+            $conditions->company_id = auth()->user()->company_id;
+            $conditions->save();
+
+            if ($conditions) {
+                return redirect()->back()->with("success", "Termo Criado");
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with("error", "Campos Vazios");
+        }
+    }
+    
+        public function termoStatus(Request $request)
+        {            
             try {
+                //code...
+                $termPbs = Termpb::first();
+                $termspb_has_company = new Termpb_has_Company();
+                $termspb_has_company->company_id = auth()->user()->company_id;
+                $termspb_has_company->termpb_id = $termPbs->id;
+                $termspb_has_company->save();
     
-                $company_id = auth()->user()->company_id;
-                $conditions = new Termo();
+                $company = company::find(auth()->user()->company_id);
+                // Atualiza o estado baseado no valor do checkbox
+                $company->status = $request->input('status') ? 'active' : 'inactive';
+                $company->save();
     
-                $conditions->privacy = $request->privacy;
-                $conditions->condition = $request->condition;
-                $conditions->company_id = $company_id;
-                $conditions->save();
-    
-                if ($conditions) {
+                if ($company) {
                     return redirect()->back()->with("success", "Termo Criado");
                 }
             } catch (\Throwable $th) {
-                return redirect()->back()->with("error", "Campos Vazios");
-            }
-        }
-    
-        public function termoStatus(Request $request)
-        {
-            $company_id = auth()->user()->company_id;
-            $item = Termo::where("company_id", $company_id)->first();
-            // Atualiza o estado baseado no valor do checkbox
-            $item->status = $request->input('status') ? 'active' : 'inactive';
-            $item->save();
-            
-            return redirect()->back()->with('success', 'Estado atualizado com sucesso!');
+                //throw $th;
+            }   
         }
 }

@@ -3,10 +3,14 @@
 @section("content")
 @include("components.color")
 
+  @if ($WhatsApp && $WhatsApp->status === "premium")
+    @include("components.pacote.whatsaApp")
+  @endif
+
     <section id="menu" class="menu">
 
         <div class="section-header text-center" style="margin-top: 3rem">
-          <h2>Nossos Produtos</h2>
+          <h2>Nossa Loja</h2>
         </div>
 
         <div class="container-fluid px-3 px-md-3 px-lg-4 tab-content" data-aos="fade-up" data-aos-delay="300">
@@ -18,7 +22,7 @@
                   <img src="https://kytutes.com/storage/{{$item['imagem']}}" class="menu-img img-fluid" alt="{{$item['nome']}}">
                 @else 
                 @endif --}}
-                <img src="{{asset("notfound.svg")}}" class="menu-img img-fluid" alt="Imagem não encontrada">
+                <img class="mb-3" style="width: 8rem; height:8rem;"  src="{{asset("service.svg")}}" class="menu-img img-fluid" alt="Imagem não encontrada">
                 <h4 style="font-size: 1.2rem;">{{$item['name']}}</h4>
         
                 <p class="price">
@@ -71,29 +75,29 @@
 </a>
 
 <style>
-  .cartcout {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 140px;
-  right: 40px;
-  background-color: #fafafa;
-  color: #FFF;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 30px;
-  box-shadow: 1px 1px 2px #888;
-  z-index: 1000;
-}
+    .cartcout {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 110px;
+    right: 40px;
+    background-color: #fafafa;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 1px 1px 2px #888;
+    z-index: 1000;
+  }
 
-.menu-item{
-  width: 100px;
-  height: 300px;
-}
+  .menu-item{
+    width: 100px;
+    height: 300px;
+  }
 
-.menu-item .menu-img{
-  width: 200px;
-  height: 150px;
-}
+  .menu-item .menu-img{
+    width: 200px;
+    height: 150px;
+  }
 </style>
 @endsection
