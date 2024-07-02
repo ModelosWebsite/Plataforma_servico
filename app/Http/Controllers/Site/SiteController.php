@@ -21,7 +21,8 @@ class SiteController extends Controller
     }
 
     //index ou pagina principal do site
-    public function index($company){
+    public function index($company)
+    {
         try {
             $data = $this->getAcceptCompany($company);
             if ($data  && $data->status === 'active') {
@@ -35,13 +36,13 @@ class SiteController extends Controller
                 $color = Color::where("company_id", isset($data->id) ? $data->id : "")->first();
                 $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
                 $name = company::where("companyhashtoken", $company)->first();
-                $packges = Pacote::where("company_id", $data->id)->first();
+                $packges = Pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
     
-                $phonenumber = footer::where("company_id", $data->id)->first();
+                $phonenumber = footer::where("company_id", isset($data->id) ? $data->id : "")->first();
                 
-                $companies = Termpb_has_Company::where("company_id", $data->id)->with('termsPBs')->first();
+                $companies = Termpb_has_Company::where("company_id", isset($data->id) ? $data->id : "")->with('termsPBs')->first();
 
-                $termos = TermsCompany::where("company_id", $data->id)->first();
+                $termos = TermsCompany::where("company_id", isset($data->id) ? $data->id : "")->first();
     
                 $api = Http::post("http://karamba.ao/api/anuncios", ["key" => "wRYBszkOguGJDioyqwxcKEliVptArhIPsNLwqrLAomsUGnLoho"]);
                 $apiArray = $api->json();
@@ -81,7 +82,9 @@ class SiteController extends Controller
             $packges = pacote::where("company_id", $data->id)->first();
             $texts = Hero::where("company_id", isset($data->id) ? $data->id : "")->get();
             $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
-
+            
+            session()->put("company", $data->companyhashtoken);
+            
             $curl = curl_init();
     
             curl_setopt_array($curl, [
@@ -119,7 +122,6 @@ class SiteController extends Controller
                 ));
             }
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return redirect()->back();
         }
     }

@@ -66,7 +66,7 @@
                         <div class="text-light p-1 mt-3 bg-danger">
                             <h5 class="text-uppercase text-center">{{ $delivery->delivery->status }}</h5>
                         </div>
-                      @elseif ($delivery->delivery->status === 'A CAMINHO')
+                      @elseif ($delivery->delivery->status === 'ACEITE')
                         <div class="text-light p-1 mt-3 bg-success">
                             <h5 class="text-uppercase text-center">{{ $delivery->delivery->status }}</h5>
                         </div>

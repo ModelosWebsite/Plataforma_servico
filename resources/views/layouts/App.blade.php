@@ -26,6 +26,7 @@
   <link href="{{url("site/css/style.css")}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{url("site/css/responsive.css")}}" rel="stylesheet" />
+  @livewireStyles
 </head>
 <body>
 
@@ -57,5 +58,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
+  @livewireScripts
+  <x-livewire-alert::scripts />
 </body>
 </html>

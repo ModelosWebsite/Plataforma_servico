@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Shopping;
 
-use App\Mail\Site\SendEmail;
 use App\Models\company;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -118,7 +116,7 @@ class Cart extends Component
                 if ($this->receipt != null and !is_string($this->receipt)) {
                     $filaName = md5($this->receipt->getClientOriginalName())
                                 .".".$this->receipt->getClientOriginalExtension();
-                    $this->receipt->storeAs("recibos",$filaName);
+                    $this->receipt->storeAs("public/recibos",$filaName);
                 }
         
                 //Acesso a API com um token
@@ -164,7 +162,6 @@ class Cart extends Component
                 if ($result) {
                     session()->put("idDelivery", $result['reference']);
                     session()->put("companyapi", $dataCompany->companyhashtoken);
-                    //Mail::to($data["email"])->send(new SendEmail($data));
                 }
 
                 $this->alert('success', 'Encomenda Finalizada');
@@ -174,7 +171,6 @@ class Cart extends Component
                 ]);
         } catch (\Throwable $th) {
                 $this->alert("error", "Falha na encomenda");
-                return redirect()->back();
         }
     }
 

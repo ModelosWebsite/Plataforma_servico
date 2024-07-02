@@ -4,7 +4,7 @@
       <div class="header_bottom">
         <div class="container-fluid px-3 px-md-3 px-lg-4">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}">
               @if ($data->logotipo != null)
                 <img width="50rem" src="{{asset("image/$data->logotipo")}}" alt="">
               @else

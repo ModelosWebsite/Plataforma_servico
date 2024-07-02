@@ -78,7 +78,7 @@
                                         
                                         <script>
                                             $(document).ready(function(){
-                                                $('#statusCheckBook').change(function(){
+                                                $('#statusTerm').change(function(){
                                                     $('#status').submit();
                                                 });
                                             });
