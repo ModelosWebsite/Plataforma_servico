@@ -1,4 +1,4 @@
-<div class="hero_area" id="home">
+<div class="hero_area" id="home" style="{{(Route::Current()->getName() == 'site.index') ? 'min-height: 100vh !important;':'min-height: 0vh !important;'}}">
     <!-- header section strats -->
     <header class="header_section fixed-top">
       <div class="header_bottom">
@@ -48,17 +48,9 @@
     </header>
     <!-- end header section -->
 
-    <!-- slider section -->
-    @if (Route::current()->getName() == "site.index")
+    @if ((Route::Current()->getName() == 'site.index'))
       @include("components.slider")
     @endif
-
-    @if (Route::current()->getName() == "platafom.service.product.list")
-      @include("components.welcome")
-    @endif
-
-    @if (Route::current()->getName() == "plataform.service.get.cart")
-      @include("components.checkout")
-    @endif
+    
     <!-- end slider section -->
   </div>

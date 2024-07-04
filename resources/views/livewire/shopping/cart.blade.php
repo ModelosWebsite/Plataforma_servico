@@ -1,5 +1,5 @@
 <div>
-    <main id="main" style="margin-top: 5rem;">
+    <main id="main" style="margin-top: 8rem;">
         <section class="shopping-cart spad">
             <div class="container-fluid px-3 px-md-3 px-lg-4">
                 <div class="row">
@@ -19,15 +19,7 @@
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
-                                                {{-- 
-                                                @if ($item->attributes['image'] != null)
-                                                    <img style="width: 80px"
-                                                        src="https://kytutes.com/storage/{{ $item->attributes['image'] }}"
-                                                        class="img-fluid" alt="">
-                                                    @else
-                                                @endif 
-                                                --}}
-                                                <img style="width: 80px" src="{{ asset("notfound.svg") }}" class="img-fluid" alt="">
+                                                <img style="width: 80px" src="{{ asset("notfound.png") }}" class="img-fluid" alt="">
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6>{{ $item->name }}</h6>
@@ -37,8 +29,8 @@
                                             <div class="quantity">
                                                 <div class="pro-qty-2">
                                                     <input class="quantity-input" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQuantity('{{$item->id}}', $event.target.value)">
-                                                    {{-- <input class="quantity-input" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQuantity('{{ $item->id }}', $event.target.value)"> --}}
                                                 </div>
+                                            </div>
                                         </td>
                                         <td class="cart__price">
                                             {{ number_format($item->price * $item->quantity, 2,',', '.') }} kz</td>
@@ -61,14 +53,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="continue__btn">
-                                    <a href="" style="border: 1px solid var(--background);">Continuar
-                                        Comprar</a>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="col-lg-4">
                         <div class="cart__discount">

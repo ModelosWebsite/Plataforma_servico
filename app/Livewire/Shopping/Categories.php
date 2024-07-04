@@ -11,16 +11,16 @@ use Livewire\Component;
 class Categories extends Component
 {
     use LivewireAlert;
-    public $category, $company, $categoria, $getCollectionsItens;
-    
+    public $category, $company, $categoria;
+
     public function render()
     {
         return view('livewire.shopping.categories',[
             'categories' => $this->getCategories(),
+            'getCollectionsItens' => $this->getItems($this->category),
         ]);
     }
 
-    //
     public function getHeaders()
     {
         return [
@@ -52,27 +52,26 @@ class Categories extends Component
         }
     }
 
-    //Pegar os Itens pertencentes a categoria selecionada
-    public function getItems($category = null)
+    public function getItems($category)
     {
         try {
-            if (isset($category) and $category != null) {
+            if ($category) {
+                $this->category = $category;
                 //Chamada a API
                 $response = Http::withHeaders($this->getHeaders())
-                ->get("https://kytutes.com/api/items?category=$category");
-                
-                $this->getCollectionsItens = Collect(json_decode($response,true));
+                ->get("https://kytutes.com/api/items?category=$category");   
+                return collect(json_decode($response,true));
             }else{
+                $this->category = $category;
                 $response = Http::withHeaders($this->getHeaders())
                 ->get("https://kytutes.com/api/items");
-                
-                $this->getCollectionsItens = Collect(json_decode($response,true));
+                return collect(json_decode($response,true));   
             }
         } catch (\Throwable $th) {
             $this->alert('error', 'ERRO', [
                 'toast'=>false,
                 'position'=>'center',
-                'showConfirmButton' => true,
+                'showConfirmButton' => false,
                 'confirmButtonText' => 'OK',
                 'text'=>'Falha ao realizar operação'
             ]);

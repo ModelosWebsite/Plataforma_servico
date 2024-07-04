@@ -58,4 +58,14 @@
     #main .shopping-cart .shopping__cart__table table thead{
         background: var(--background);
     }
+
+    /*Menu*/
+    .container-scroll i:hover {
+        background: var(--background);
+    }
+
+    .container-scroll button:hover,
+       .container-scroll button.active{
+        background: var(--background);
+       }
 </style>

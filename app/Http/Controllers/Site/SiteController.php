@@ -43,7 +43,7 @@ class SiteController extends Controller
                 $companies = Termpb_has_Company::where("company_id", isset($data->id) ? $data->id : "")->with('termsPBs')->first();
 
                 $termos = TermsCompany::where("company_id", isset($data->id) ? $data->id : "")->first();
-    
+
                 $api = Http::post("http://karamba.ao/api/anuncios", ["key" => "wRYBszkOguGJDioyqwxcKEliVptArhIPsNLwqrLAomsUGnLoho"]);
                 $apiArray = $api->json();
         

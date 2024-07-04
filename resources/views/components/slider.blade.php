@@ -1,4 +1,4 @@
-<section class="slider_section" id="slider_section" style="margin-top: 4.80rem;">
+<section class="slider_section" id="slider_section" style="margin-top: 4rem;">
     <div class="slider_bg_box">
       <img src="{{url(isset($heroImage->image) ? "image/$heroImage->image" : "")}}" alt="">
     </div>

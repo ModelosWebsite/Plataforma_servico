@@ -1,4 +1,4 @@
-<section class="slider_section" id="slider_section" style="margin-top: 4.80rem;">
+<section class="slider_section" id="slider_section" style="margin-top: 4rem;">
     <div class="slider_bg_box">
       <img src="{{ asset("image/2349.png") }}" alt="">
     </div>

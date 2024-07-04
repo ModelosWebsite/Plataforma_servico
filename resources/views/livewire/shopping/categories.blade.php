@@ -22,7 +22,7 @@
        }
      
        .container-scroll i:hover {
-         background: #cf597a;
+         background: var(--background);
          color: #fff;
        }
      
@@ -62,7 +62,7 @@
      
        .container-scroll button:hover,
        .container-scroll button.active {
-         background: #cf597a;
+         background: var(--background);
          color: #fff;
        }
      
@@ -104,18 +104,25 @@
                     </svg>
                 </i>
             </div>
-            
+          
             <ul>
-                <li><button class="category active" wire:click="getItems('{{$dados = null}}')">Todos</button></li>
-                @if (isset($categories) && count($categories) > 0)
-                    @foreach ($categories as $item)
-                        <li wire:click="getItems('{{$item['Categoria']}}')">
-                            <button class="category" aria-label="Show category {{ $item['Categoria'] }}">{{ $item['Categoria'] }}</button>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
-            
+              <li>
+                  <button class="category {{ $category == null ? 'active' : '' }}" wire:click="getItems(null)">Todos</button>
+              </li>
+              @if (isset($categories) && count($categories) > 0)
+                  @foreach ($categories as $item)
+                      <li>
+                          <button 
+                              class="category {{ $category == $item['reference'] ? 'active' : '' }}" 
+                              wire:click="getItems('{{ $item['reference'] }}')" 
+                              aria-label="Show category {{ $item['Categoria'] }}">
+                              {{ $item['Categoria'] }}
+                          </button>
+                      </li>
+                  @endforeach
+              @endif
+          </ul>
+          
             <div class="iconChevron-right active">
                 <i class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
@@ -129,33 +136,27 @@
     
     <div class="container-fluid px-3 px-md-3 px-lg-4 tab-content" data-aos="fade-up" data-aos-delay="300">
         <div class="row gy-5">
-        @if (is_array($getCollectionsItens) || $getCollectionsItens instanceof \Illuminate\Support\Collection)
-            @if ($getCollectionsItens->count() > 0)
-                @foreach($getCollectionsItens as $item)
-                    <div class="col-lg-4 menu-item text-center align-items-center mt-2 mb-2">
-                        <img class="mb-3" style="width: 8rem; height:8rem;" src="{{ asset($item['image'] ?? 'service.svg') }}" class="menu-img img-fluid" alt="{{ $item['name'] ?? 'Service Image' }}">
-                        <h4 style="font-size: 1.2rem;">{{ $item['name'] ?? '' }}</h4>
-                        <p class="price">
-                            {{ number_format($item['price'] ?? 0, 2, ',', '.') }} kz 
-                        </p>
-                        <a wire:click="addToCart('{{$item['name']}}')" class="btn btn-primary text-white">
-                            Adicionar
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
-                            </svg>
-                        </a>
-                    </div>
-                @endforeach
-            @else
-                <div class="rounded col-md-12 d-flex justify-content-center align-items-center flex-column mt-5" style="height: 20rem; border: 1px dashed #000;">
-                    <h5 class="text-muted text-center text-uppercase">A consulta não retornou nenhum resultado</h5>
-                </div>
-            @endif
-        @else
-            <div class="rounded col-md-12 d-flex justify-content-center align-items-center flex-column mt-5" style="height: 20rem; border: 1px dashed #000;">
-                <h5 class="text-muted text-center text-uppercase">A consulta não retornou nenhum resultado válido</h5>
-            </div>
-        @endif
+              @if (isset($getCollectionsItens) and $getCollectionsItens->count() > 0)
+                  @foreach($getCollectionsItens as $item)
+                      <div class="col-lg-4 menu-item text-center align-items-center mt-2 mb-2">
+                          <img class="mb-3" style="width: 8rem; height:8rem;" src="{{ asset($item['image'] ?? 'service.svg') }}" class="menu-img img-fluid" alt="{{ $item['name'] ?? 'Service Image' }}">
+                          <h4 style="font-size: 1.2rem;">{{ $item['name'] ?? '' }}</h4>
+                          <p class="price">
+                              {{ number_format($item['price'] ?? 0, 2, ',', '.') }} kz 
+                          </p>
+                          <a wire:click="addToCart('{{$item['name'] ?? ''}}')" class="btn btn-primary text-white">
+                              Adicionar
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                              </svg>
+                          </a>
+                      </div>
+                  @endforeach
+              @else
+                  <div class="rounded col-md-12 d-flex justify-content-center align-items-center flex-column mt-5" style="height: 20rem; border: 1px dashed #000;">
+                      <h5 class="text-muted text-center text-uppercase">A consulta não retornou nenhum resultado</h5>
+                  </div>
+              @endif
         </div>
       </div>
 
