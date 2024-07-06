@@ -3,7 +3,7 @@
 @section("content")
 @include("components.color")
 
-  @if ($WhatsApp && $WhatsApp->status === "premium")
+  @if ($WhatsApp && $WhatsApp->pacote === "WhatsApp" && $WhatsApp->status === "premium")
     @include("components.pacote.whatsaApp")
   @endif
 

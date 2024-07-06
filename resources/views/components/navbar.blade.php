@@ -29,13 +29,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}#service">Serviços</a>
                 </li>
-                @if ($packges && $packges->status === "premium" && $packges->pacote === "Shopping")
+                @if ($packges && $packges->pacote === "Shopping" && $packges->status === "premium")
                   <li class="nav-item">
                     <a class="nav-link" href="{{route("platafom.service.product.list", ["company" => $data->companyhashtoken])}}">Loja</a>
                   </li>
-                  {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{route("plataform.service.get.status")}}">Encomenda </a>
-                  </li> --}}
                 @endif
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route("site.index", ["company" => $data->companyhashtoken]) }}#contact">Contacto </a>
