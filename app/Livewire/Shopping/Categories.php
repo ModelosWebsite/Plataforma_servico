@@ -57,7 +57,6 @@ class Categories extends Component
         try {
             if ($category) {
                 $this->category = $category;
-                //Chamada a API
                 $response = Http::withHeaders($this->getHeaders())
                 ->get("https://kytutes.com/api/items?category=$category");   
                 return collect(json_decode($response,true));
