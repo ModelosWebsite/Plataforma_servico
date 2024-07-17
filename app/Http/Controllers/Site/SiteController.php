@@ -35,9 +35,11 @@ class SiteController extends Controller
                 $start = Detail::where("company_id", isset($data->id) ? $data->id : "")->get();
                 $startImage = Detail::where("company_id", isset($data->id) ? $data->id : "")->first();
                 $color = Color::where("company_id", isset($data->id) ? $data->id : "")->first();
-                $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
+                $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")
+                ->where("pacote", "WhatsApp")->first();
                 $name = company::where("companyhashtoken", $company)->first();
-                $packges = Pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
+                $packges = Pacote::where("company_id", isset($data->id) ? $data->id : "")
+                ->where("pacote", "Shopping")->first();
     
                 $phonenumber = footer::where("company_id", isset($data->id) ? $data->id : "")->first();
                 
@@ -82,9 +84,11 @@ class SiteController extends Controller
         try {
             $data = $this->getAcceptCompany($company);
             $color = Color::where("company_id", isset($data->id) ? $data->id : "")->first();
-            $packges = pacote::where("company_id", $data->id)->first();
             $texts = Hero::where("company_id", isset($data->id) ? $data->id : "")->get();
-            $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")->first();
+            $WhatsApp = pacote::where("company_id", isset($data->id) ? $data->id : "")
+            ->where("pacote", "WhatsApp")->first();
+            $packges = pacote::where("company_id", $data->id)
+            ->where("pacote", "Shopping")->first();
             
             session()->put("company", $data->companyhashtoken);
             

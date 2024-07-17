@@ -8,7 +8,7 @@
   @include("components.pacote.conditions")
 
 
-  @if ($WhatsApp && $WhatsApp->status === "premium")
+  @if ($WhatsApp && $WhatsApp->pacote === "WhatsApp" && $WhatsApp->status === "premium")
     @include("components.pacote.whatsaApp")
   @endif
 
@@ -246,7 +246,7 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-3 info_col">
-          <div class="position-relative col-12 col-xl-6">
+          <div class="position-relative">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 @foreach ($apiArray as $anuncio)
