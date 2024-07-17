@@ -42,6 +42,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Pacotes Premium -->
+    <li class="nav-item {{(Route::current()->getName() == "super.admin.metrics.index") ? "bg-white" : ""}}">
+        <a class="nav-link {{(Route::current()->getName() == "super.admin.metrics.index") ? "text-primary" : ""}}" href="{{route("super.admin.metrics.index")}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Metricas</span>
+        </a>
+    </li>
+
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {{Route::current()->getName() == "super.admin.documentation.index" ? "bg-white" : ""}}">
             <a class="nav-link {{Route::current()->getName() == "super.admin.documentation.index" ? "text-primary" : ""}}" href="{{route("super.admin.documentation.index")}}">

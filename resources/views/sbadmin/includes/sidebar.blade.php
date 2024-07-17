@@ -42,6 +42,14 @@
         </a>
     </li>
 
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" target="_blank" href="https://kytutes.com/auth/login">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Portal PB</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

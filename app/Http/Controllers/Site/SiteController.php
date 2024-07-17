@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\{About, service, Color, company, Detail, footer, Hero, pacote, Termpb_has_Company, TermsCompany};
+use App\Models\{About, service, Color, company, Detail, footer, Hero, pacote, Termpb_has_Company, TermsCompany, visitor};
 use Illuminate\Support\Facades\Http;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Support\Facades\Session;
+use Jenssegers\Agent\Agent;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SiteController extends Controller
@@ -46,7 +47,9 @@ class SiteController extends Controller
 
                 $api = Http::post("http://karamba.ao/api/anuncios", ["key" => "wRYBszkOguGJDioyqwxcKEliVptArhIPsNLwqrLAomsUGnLoho"]);
                 $apiArray = $api->json();
-        
+
+                $this->getVisitor($name);
+
                 return view("site.home", [
                     "heroImage" => $heroImage,
                     "texts" => $texts,
@@ -262,5 +265,39 @@ class SiteController extends Controller
         return view("site.shopping.estado.app",
             compact("itensColletions") 
         );
+    }
+
+    public function getVisitor($name)
+    {
+        try {
+            // Capturar informações da requisição
+            $userAgent = request()->header('User-Agent');
+
+            // Usar a biblioteca Jenssegers/Agent para analisar o user agent
+            $agent = new Agent();
+            $agent->setUserAgent($userAgent);
+
+            //salvar os dados no banco
+            $visitors = new visitor();
+
+            $visitors->ip = request()->ip();
+            $visitors->browser = $agent->browser();
+            $visitors->system = $agent->platform();
+            $visitors->device = $agent->device();
+            
+            if ($agent->isDesktop()) {
+                $visitors->typedevice = "Computador";
+            }if ($agent->isPhone()) {
+                $visitors->typedevice = "Telefone";
+            }if ($agent->isTablet()) {
+                $visitors->typedevice = "Tablet";
+            }
+            
+            $visitors->company = $name->companyname;
+            
+            $visitors->save();
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
     }
 }
