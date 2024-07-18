@@ -35,15 +35,15 @@
                                     <div class="row gy-5">
                                     @foreach($data as $item)          
                                     <div class="col-lg-4 menu-item text-center align-items-center mt-2 mb-2">
-                                      @if ($item['imagem'] != null)
-                                        <img src="https://kytutes.com/storage/{{$item['imagem']}}" class="menu-img img-fluid" alt="">
+                                      @if ($item['image'] != null)
+                                        <img src="https://kytutes.com/storage/{{$item['image']}}" class="menu-img img-fluid" alt="">
                                       @else 
                                         <img src="{{asset("notfound.png")}}" class="menu-img img-fluid" alt="">
                                       @endif
-                                      <h4 style="font-size: 1.2rem;">{{$item['nome']}}</h4>
+                                      <h4 style="font-size: 1.2rem;">{{$item['name']}}</h4>
                         
                                       <p class="price">
-                                        kz {{number_format($item['preco'], 2,'.',',')}} 
+                                        kz {{number_format($item['price'], 2,'.',',')}} 
                                       </p>
                         
                                       <a href="{{route("loja.add.cart", $item['reference'])}}" class="btn btn-primary">

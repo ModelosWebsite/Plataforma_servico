@@ -17,7 +17,7 @@ class StatusDeliveryController extends Controller
             $headers = [
                 "Accept" => "application/json",
                 "Content-Type" => "application/json",
-                "Authorization" => "Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
+                "Authorization" => "Bearer 12|dm3tMWyRNdIiRMoaDovs4ReOSf94k3FpQhOtiHU2936a5b21",
             ];
             
             //Chamada a API

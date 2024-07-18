@@ -25,7 +25,7 @@ class ShoopingController extends Controller
         CURLOPT_POSTFIELDS => "",
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
-            "Authorization: Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
+            "Authorization: Bearer 12|dm3tMWyRNdIiRMoaDovs4ReOSf94k3FpQhOtiHU2936a5b21",
             "Content-Type: application/json"
         ],
         ]);
@@ -59,7 +59,7 @@ class ShoopingController extends Controller
          CURLOPT_POSTFIELDS => "",
          CURLOPT_HTTPHEADER => [
              "Accept: application/json",
-             "Authorization: Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
+             "Authorization: Bearer 12|dm3tMWyRNdIiRMoaDovs4ReOSf94k3FpQhOtiHU2936a5b21",
              "Content-Type: application/json"
          ]
         ]);
@@ -76,11 +76,11 @@ class ShoopingController extends Controller
            
             Cart::add(array(
                 'id' => $data[0]["reference"],
-                'name' => $data[0]["nome"],
-                'price' => $data[0]["preco"],
+                'name' => $data[0]["name"],
+                'price' => $data[0]["price"],
                 'quantity' => 1,
                 'attributes' => array(
-                    'image' => $data[0]["imagem"]
+                    'image' => $data[0]["image"]
                 )
             ));
 
@@ -106,7 +106,7 @@ class ShoopingController extends Controller
         CURLOPT_POSTFIELDS => "",
         CURLOPT_HTTPHEADER => [
             "Accept: application/json",
-            "Authorization: Bearer 2|KLgAGFkyGxcwcMQIg1GAPPPBvR64BwtRxw9oTWsRd9fee9ee",
+            "Authorization: Bearer 12|dm3tMWyRNdIiRMoaDovs4ReOSf94k3FpQhOtiHU2936a5b21",
             "Content-Type: application/json"
         ],
         ]);
